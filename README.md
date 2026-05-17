@@ -1,269 +1,181 @@
-# DNA Binding Protein Classification
+# Instructions
 
 ## Introduction
 
-This project focuses on DNA Binding Protein classification using various machine learning models. Our goal is to explore different feature extraction methods and classifiers to accurately distinguish between binding and non-binding
-proteins. By both biological knowledge (amino acid distribution, term frequency
-inverse document term, physicochemical properties) and natural language processing techniques (embedding, integer encoding) with both traditional MLs
-(Logistic Regression, Naive Bayes, KNN, Support Vector Machine, Decision
-Tree, Random Forest) and Deep Learning models (CNN, ProtCNN, Large Language Model), we aim to identify the most effective approach for protein classification.
+This project focuses on DNA Binding Protein classification using various machine learning models. Our goal is to explore different feature extraction methods and classifiers to accurately distinguish between binding and non-binding proteins.
 
+By both biological knowledge, including amino acid distribution, term frequency inverse document term, and physicochemical properties, and natural language processing techniques, including embedding and integer encoding, with both traditional MLs, including Logistic Regression, Naive Bayes, KNN, Support Vector Machine, Decision Tree, and Random Forest, and Deep Learning models, including CNN, ProtCNN, and Large Language Model, we aim to identify the most effective approach for protein classification.
 
-## Project Structure
+## Dataset and Files
 
-### Code Folder
+We are using the dataset titled **DNA Binding Protein**.
 
-The notebooks should be accessed in the following order:
+In the **Code Folder**, here is the order of the code files we intend for you to access:
 
 1. `Exploratory Data Analysis.ipynb`
-2. `AAD.ipynb` - Amino Acid Distribution and TF-IDF
+2. `AAD.ipynb` - Amino Acid Distribution & TF-IDF
 3. `TF-IDF.ipynb` - Term Frequency-Inverse Document Frequency
-4. `Physicochemical Properties.ipynb`
-5. `pseAAC.ipynb` - Pseudo Amino Acid Composition
+4. `Physicochemical Properties.ipynb` - Physicochemical Properties
+5. `pseAAC.ipynb` - Pseudo Amino-Acid Composition
 6. `CNN.ipynb` - Convolutional Neural Network
 7. `ProtBert.ipynb` - Large Language Model
 8. `Comparison Plots between Models`
 
-## Dataset and Files
+In the **Model & DataSet** folder, below are 4 datasets we include:
 
-The dataset used in this project is titled **DNA Binding Protein**.
+1. `Train.fasta`: original training dataset
+2. `Test.fasta`: original testing dataset
+3. `Train_valid.fasta`: cleaned training dataset containing only sequences with common amino acids
+4. `Test_valid.fasta`: cleaned testing dataset containing only sequences with common amino acids
+5. `DNA_Test.csv`: cleaned testing dataset containing physicochemical properties
+6. `DNA_Train.csv`: cleaned testing dataset containing physicochemical properties
 
-### Dataset Files
+Below are the saved files for different models:
 
-The `Model & DataSet` folder contains the following datasets:
+1. `LR_Amino_Acid_Distribution_Full.joblib`: Logistic Regression classifier with full 20 amino acid distribution as features
+2. `LR_Amino_Acid_Distribution_Selected.joblib`: Logistic Regression classifier with selected 20 amino acid distribution as features
+3. `NB_Amino_Acid_Distribution_Full.joblib`: Naive Bayes classifier with full 20 amino acid distribution as features
+4. `NB_Amino_Acid_Distribution_Selected.joblib`: Logistic Regression classifier with selected 20 amino acid distribution as features
+5. `KNN_Amino_Acid_Distribution_Full.joblib`: K-Nearest Neighbour classifier with full 20 amino acid distribution as features
+6. `KNN_Amino_Acid_Distribution_Selected.joblib`: K-Nearest Neighbour classifier with selected 20 amino acid distribution as features
+7. `DT_Amino_Acid_Distribution_Full.joblib`: Decision Tree classifier with full 20 amino acid distribution as features
+8. `DT_Amino_Acid_Distribution_Selected.joblib`: Decision Tree classifier with selected 20 amino acid distribution as features
+9. `RF_Amino_Acid_Distribution_Full.joblib`: Random Forest classifier with full 20 amino acid distribution as features
+10. `RF_Amino_Acid_Distribution_Selected.joblib`: Random Forest classifier with selected 20 amino acid distribution as features
+11. `SVM_Amino_Acid_Distribution_Full.joblib`: Support Vector Machine classifier with full 20 amino acid distribution as features
+12. `SVM_Amino_Acid_Distribution_Selected.joblib`: Support Vector Machine classifier with selected 20 amino acid distribution as features
+13. `LR_Physicochemical_Properties.joblib`: Logistic Regression classifier with physicochemical properties as features
+14. `NB_Physicochemical_Properties.joblib`: Naive Bayes classifier with physicochemical properties as features
+15. `KNN_Physicochemical_Properties.joblib`: K-Nearest Neighbour classifier with physicochemical properties as features
+16. `DT_Physicochemical_Properties.joblib`: Decision Tree classifier with physicochemical properties as features
+17. `RF_Physicochemical_Properties.joblib`: Random Forest classifier with physicochemical properties as features
+18. `SVM_Physicochemical_Properties.joblib`: Support Vector Machine classifier with physicochemical properties as features
+19. `LR_pseAAC.joblib`: Logistic Regression classifier with pseudo-Amino Acid Composition as features
+20. `NB_pseAAC.joblib`: Naive Bayes classifier with pseudo-Amino Acid Composition as features
+21. `KNN_pseAAC.joblib`: K-Nearest Neighbour classifier with pseudo-Amino Acid Composition as features
+22. `DT_pseAAC.joblib`: Decision Tree classifier with pseudo-Amino Acid Composition as features
+23. `RF_pseAAC.joblib`: Random Forest classifier with pseudo-Amino Acid Composition as features
+24. `SVM_pseAAC.joblib`: Support Vector Machine classifier with pseudo-Amino Acid Composition as features
+25. `CNN1.h5`: CNN model using Embedding technique
+26. `CNN2.h5`: CNN model using Amino acid integer encoding
+27. `ProtCNN1.h5`: ProtCNN model using Embedding technique
+28. `ProtCNN2.h5`: ProtCNN model using Amino acid integer encoding
+29. `trained_model`: This folder includes the trained model’s weights and architecture configuration. It contains files like `pytorch_model.bin`, the model weights, and `config.json`, model configuration. These files are necessary for loading and using the trained model later without retraining.
+30. `trained_tokenizer`: This folder holds the tokenizer files required to preprocess your input data the same way as during training. It includes `vocab.txt`, the vocabulary, and `tokenizer_config.json`, tokenizer settings.
 
-| File | Description |
-|---|---|
-| `Train.fasta` | Original training dataset |
-| `Test.fasta` | Original testing dataset |
-| `Train_valid.fasta` | Cleaned training dataset containing only sequences with common amino acids |
-| `Test_valid.fasta` | Cleaned testing dataset containing only sequences with common amino acids |
-| `DNA_Test.csv` | Cleaned testing dataset containing physicochemical properties |
-| `DNA_Train.csv` | Cleaned training dataset containing physicochemical properties |
+Ensure that the training and testing data, `Train.fasta` and `Test.fasta`, are present in the same root directory as the aforementioned files. Moreover, the filtered `Train_valid.fasta` and `Test_valid.fasta` are also in the same folder. Those contain filtered datasets for protein sequences that contain common amino acids.
 
-Make sure the training and testing files are located in the same root directory as the notebooks and model files.
+In each subsequent section, we outline the required libraries and any additional requirements to run the code.
 
----
+## Installing Libraries
 
-## Saved Models
-
-### Amino Acid Distribution Models
-
-| File | Description |
-|---|---|
-| `LR_Amino_Acid_Distribution_Full.joblib` | Logistic Regression with full 20 amino acid distribution features |
-| `LR_Amino_Acid_Distribution_Selected.joblib` | Logistic Regression with selected amino acid distribution features |
-| `NB_Amino_Acid_Distribution_Full.joblib` | Naive Bayes with full 20 amino acid distribution features |
-| `NB_Amino_Acid_Distribution_Selected.joblib` | Naive Bayes with selected amino acid distribution features |
-| `KNN_Amino_Acid_Distribution_Full.joblib` | K-Nearest Neighbours with full 20 amino acid distribution features |
-| `KNN_Amino_Acid_Distribution_Selected.joblib` | K-Nearest Neighbours with selected amino acid distribution features |
-| `DT_Amino_Acid_Distribution_Full.joblib` | Decision Tree with full 20 amino acid distribution features |
-| `DT_Amino_Acid_Distribution_Selected.joblib` | Decision Tree with selected amino acid distribution features |
-| `RF_Amino_Acid_Distribution_Full.joblib` | Random Forest with full 20 amino acid distribution features |
-| `RF_Amino_Acid_Distribution_Selected.joblib` | Random Forest with selected amino acid distribution features |
-| `SVM_Amino_Acid_Distribution_Full.joblib` | Support Vector Machine with full 20 amino acid distribution features |
-| `SVM_Amino_Acid_Distribution_Selected.joblib` | Support Vector Machine with selected amino acid distribution features |
-
-### Physicochemical Property Models
-
-| File | Description |
-|---|---|
-| `LR_Physicochemical_Properties.joblib` | Logistic Regression using physicochemical properties |
-| `NB_Physicochemical_Properties.joblib` | Naive Bayes using physicochemical properties |
-| `KNN_Physicochemical_Properties.joblib` | K-Nearest Neighbours using physicochemical properties |
-| `DT_Physicochemical_Properties.joblib` | Decision Tree using physicochemical properties |
-| `RF_Physicochemical_Properties.joblib` | Random Forest using physicochemical properties |
-| `SVM_Physicochemical_Properties.joblib` | Support Vector Machine using physicochemical properties |
-
-### pseAAC Models
-
-| File | Description |
-|---|---|
-| `LR_pseAAC.joblib` | Logistic Regression using pseudo amino acid composition |
-| `NB_pseAAC.joblib` | Naive Bayes using pseudo amino acid composition |
-| `KNN_pseAAC.joblib` | K-Nearest Neighbours using pseudo amino acid composition |
-| `DT_pseAAC.joblib` | Decision Tree using pseudo amino acid composition |
-| `RF_pseAAC.joblib` | Random Forest using pseudo amino acid composition |
-| `SVM_pseAAC.joblib` | Support Vector Machine using pseudo amino acid composition |
-
-### Deep Learning Models
-
-| File or Folder | Description |
-|---|---|
-| `CNN1.h5` | CNN model using embedding |
-| `CNN2.h5` | CNN model using amino acid integer encoding |
-| `ProtCNN1.h5` | ProtCNN model using embedding |
-| `ProtCNN2.h5` | ProtCNN model using amino acid integer encoding |
-| `trained_model/` | Trained model weights and architecture configuration |
-| `trained_tokenizer/` | Tokenizer files required for preprocessing input data |
-
-The `trained_model/` folder contains files such as:
-
-- `pytorch_model.bin`
-- `config.json`
-
-The `trained_tokenizer/` folder contains files such as:
-
-- `vocab.txt`
-- `tokenizer_config.json`
-
----
-
-## Installation
-
-Make sure `requirements.txt` is located in the root directory.
-
-Install the required libraries with:
+Ensure that the file `requirements.txt` is present in the root directory. Run the following command in your terminal to install all required libraries:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-The required libraries include:
+It should install the following libraries not included in a fresh installation of Python:
 
-```txt
-biopython
-imbalanced-learn
-propy3
-scikit-learn
-tensorflow
-tqdm
-pandas
-numpy
-keras
-seaborn
-kat
-statsmodels
-```
+- biopython
+- imbalanced-learn
+- propy3
+- scikit-learn
+- tensorflow
+- tqdm
+- pandas
+- numpy
+- keras
+- seaborn
+- kat
+- statsmodels
 
----
+## Exploratory Data Analysis
 
-## Notebook Descriptions
+In this file, we attempted to make sense of the data. We did so by reading and processing textual data, then plotting simple graphs to understand what we are working with. In particular, we explored the composition of class 1 and class 0 amino acids, explored amino acid distributions, and analysed protein sequence length distribution.
 
-## 1. Exploratory Data Analysis
+### Running Code
 
-This notebook is used to understand the dataset before model training.
+Code may be run in a Jupyter notebook environment without issues. If run in a Google Colab environment, ensure training and testing data is uploaded and file path is correctly adjusted.
 
-It includes:
+## Amino Acid Frequency Distribution and TF-IDF
 
-- Reading and processing protein sequence data
-- Exploring class 0 and class 1 amino acid composition
-- Analyzing amino acid distributions
-- Analyzing protein sequence length distributions
-- Plotting graphs for data exploration
+In this file, we used biological knowledge to extract biological features of amino acid frequency distribution and TF-IDF, and attempted to classify the proteins using traditional Machine Learning models.
 
-### Running the Notebook
+### Running Code
 
-The notebook can be run in a Jupyter Notebook environment.
+Code may be run in a Jupyter notebook environment without issues. If run in a Google Colab environment, ensure training and testing data is uploaded.
 
-If using Google Colab, make sure the training and testing data are uploaded and that the file paths are adjusted correctly.
+### Saving/Loading Model
 
----
-
-## 2. Amino Acid Frequency Distribution and TF-IDF
-
-This notebook uses biological features such as amino acid frequency distribution and TF-IDF to classify proteins using traditional machine learning models.
-
-### Running the Notebook
-
-The notebook can be run in Jupyter Notebook.
-
-If using Google Colab, make sure the training and testing data are uploaded.
-
-### Saving and Loading Models
-
-To load a saved model:
+To load the saved model, you need to import the load function from the joblib library and call the load function with the file name.
 
 ```python
-import joblib
+from sklearn.externals import joblib
 
 model = joblib.load(filename)
 ```
 
----
+## Physicochemical Properties
 
-## 3. Physicochemical Properties
+In this file, we explored how different forms of physicochemical properties of an amino acid, which includes hydrophobicity, net charge, etc., may affect the classification of a protein using traditional Machine Learning models.
 
-This notebook explores how physicochemical properties of amino acids, such as hydrophobicity and net charge, can be used for protein classification with traditional machine learning models.
+### Running Code
 
-### Running the Notebook
+Code may be run in a Jupyter notebook environment without issues. If run in a Google Colab environment, ensure training and testing data is uploaded.
 
-The notebook can be run in Jupyter Notebook.
+### Saving/Loading Model
 
-If using Google Colab, make sure the training and testing data are uploaded.
-
-### Saving and Loading Models
-
-To load a saved model:
+To load the saved model, you need to import the load function from the joblib library and call the load function with the file name.
 
 ```python
-import joblib
+from sklearn.externals import joblib
 
 model = joblib.load(filename)
 ```
 
----
+## pseAAC
 
-## 4. pseAAC
+In this file, we explored how standard forms of amino acid distribution may be improved by incorporating additional information such as patterns in sequences and physicochemical properties may affect the classification of protein using traditional Machine Learning models.
 
-This notebook explores pseudo amino acid composition as a feature extraction method.
+### Running Code
 
-pseAAC improves standard amino acid distribution by incorporating additional sequence pattern information and physicochemical properties.
+Code may be run in a Google Colab environment. Ensure training and testing data is uploaded.
 
-### Running the Notebook
+Warning: estimated time to run the code is around 22 hours.
 
-The notebook can be run in Jupyter Notebook.
+### Saving/Loading Model
 
-If using Google Colab, make sure the training and testing data are uploaded.
-
-> Warning: this notebook may take around 22 hours to run.
-
-### Saving and Loading Models
-
-To load a saved model:
+To load the saved model, you need to import the load function from the joblib library and call the load function with the file name.
 
 ```python
-import joblib
+from sklearn.externals import joblib
 
 model = joblib.load(filename)
 ```
 
----
+## CNN
 
-## 5. CNN
+In this file, we explored using Convolutional Neural Networks as a classifier using Natural Language Processing techniques, namely embedding and amino acid integer encoding. Notably, we are using `Train_valid.fasta` and `Test_valid.fasta` here as training and testing dataset here.
 
-This notebook uses Convolutional Neural Networks for protein classification with NLP-based techniques:
+### Running Code
 
-- Embedding
-- Amino acid integer encoding
+Code may be run in a Jupyter notebook environment without issues. If run in a Google Colab environment, ensure training and testing data is uploaded.
 
-This notebook uses:
+Switching to GPU is recommended for faster training time.
 
-- `Train_valid.fasta`
-- `Test_valid.fasta`
+Warning: running on CPU might take total 24 hours while using GPU might take around 2 hours.
 
-### Running the Notebook
+### Saving/Loading Model
 
-The notebook can be run in Jupyter Notebook.
-
-If using Google Colab, make sure the training and testing data are uploaded.
-
-Using a GPU is recommended for faster training.
-
-> Warning: running on CPU may take around 24 hours, while running on GPU may take around 2 hours.
-
-### Saving and Loading Models
-
-The model can be saved and loaded using an H5 file.
-
-An H5 file includes:
+The model may be saved and loaded using a H5 file. The H5 file includes everything about the model, including:
 
 - Model weights
 - Model architecture
-- Model compilation details
+- Model compilation details, loss and metrics
 - Model optimizer state
 
-To load a saved model:
+For later use, load and use the model directly without having to re-compile and train the model following this syntax:
 
 ```python
 from keras.models import load_model
@@ -271,38 +183,21 @@ from keras.models import load_model
 model = load_model(file_path)
 ```
 
----
+## LLM
 
-## 6. LLM / ProtBERT
+In this file, we explored using Large Language Models as a classifier. In particular, we used a pretrained model, ProtBert.
 
-This notebook uses a Large Language Model for protein classification.
+### Running Code
 
-The model used is **ProtBERT**, a pretrained protein language model.
+Code may be run in a Jupyter notebook environment without issues. If run in a Google Colab environment, ensure training and testing data is uploaded.
 
-### Running the Notebook
+Warning: training might take 2.5 hours.
 
-The notebook can be run in Jupyter Notebook.
+### Saving/Loading Model
 
-If using Google Colab, make sure the training and testing data are uploaded.
-
-> Warning: training may take around 2.5 hours.
-
-### Loading the Model
-
-Example loading syntax:
+You can load in this way:
 
 ```python
-from transformers import BertModel
-
 model = BertModel.from_pretrained(filename)
 ```
 
----
-
-## Notes
-
-- Ensure all datasets are placed in the correct root directory before running the notebooks.
-- Use the cleaned `Train_valid.fasta` and `Test_valid.fasta` files for CNN-based models.
-- GPU usage is recommended for deep learning notebooks.
-- Some notebooks may take several hours to complete.
-- Public URLs are not included in this README.
